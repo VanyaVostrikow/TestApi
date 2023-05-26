@@ -4,7 +4,7 @@ INFO=0
 bd_NAME=test_api
 bd_USER=bigdata
 bd_PASSWORD=1024bytes
-bd_HOST=localhost
+bd_HOST=10.0.0.79
 bd_PORT=5432
 
 \\\
