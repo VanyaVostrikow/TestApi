@@ -37,8 +37,12 @@ class COPViewSet(mixins.RetrieveModelMixin,
        
     def mycreate(self, request, *args, **kwargs):
         serializer = COPSerializer(data=request.data)
+        seq = request.data.get('seq')
+        print(seq)
         serializer.is_valid(raise_exception=True)
+        serializer.check_seq(request.data.get('seq'))
         serializer.save()
+        
         return Response({'answer':serializer.data})
     
 
@@ -65,7 +69,7 @@ class COPViewSet(mixins.RetrieveModelMixin,
         except:
             return Response({'error':'404#NOT_FOUNDED', 'message':'Odject not founded'})
         serializer = COPSerializer(instance=instance, data=request.data, partial=True)
-        ans = json.loads(serializer.data)
+        serializer.check_seq(request.data.get('seq'))
         serializer.is_valid()
         serializer.save()
         return Response({'put':serializer.validated_data})
@@ -77,10 +81,7 @@ class COPViewSet(mixins.RetrieveModelMixin,
                     return Response({'error404':'not founded'})
                 error = list_queryset.get('error').get('error')
                 return Response({'error':error})
-        list_queryset = list_queryset.get("queryset")
-        print(list_queryset)
-        print(type(list_queryset), list_queryset[0])
-        out_queryset = []
+        list_queryset = list_queryset.get("queryset").order_by('seq')
         page = self.paginate_queryset(list_queryset) #реализация пагинации
         if page is not None:
             serializer = self.get_serializer(page, many=True)
@@ -122,7 +123,7 @@ class GOPViewSet(mixins.RetrieveModelMixin,
         except:
             return Response({'error':'404#NOT_FOUNDED', 'message':'Odject not founded'})
         serializer = GOPSerializer(instance=instance, data=request.data, partial=True)
-        
+        serializer.check_seq()
         serializer.is_valid()
         serializer.save()
         return Response({'put':serializer.validated_data})

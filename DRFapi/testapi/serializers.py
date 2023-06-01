@@ -5,10 +5,19 @@ from rest_framework.parsers import JSONParser
 import io
 
 class COPSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = CategoriesOfProducts
         fields = ("__all__")
+
+    def check_seq(self,seq):
+        queryset = CategoriesOfProducts.objects.all().order_by('seq')
+        for i in range(len(queryset)):
+            print(queryset[i], queryset[i].seq, seq,type(queryset[i]))
+            if queryset[i].seq >= seq:
+
+                queryset[i].seq += 1
+                queryset[i].save()
+            
 
 
 
@@ -18,6 +27,14 @@ class GOPSerializer(serializers.ModelSerializer):
         model = GroupsofProducts
         fields = ('__all__')
 
+    def check_seq(self,seq):
+        queryset = GroupsofProducts.objects.all().order_by('seq')
+        for i in range(len(queryset)):
+            print(queryset[i], queryset[i].seq, seq,type(queryset[i]))
+            if queryset[i].seq >= seq:
+
+                queryset[i].seq += 1
+                queryset[i].save()
         
 class PSerializer(serializers.ModelSerializer):
 
@@ -26,21 +43,6 @@ class PSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
         
-    # id = serializers.IntegerField()
-    # name = serializers.CharField(max_length=255)
-    # seq = serializers.IntegerField()
-
-    # def create(self, validated_data):
-    #     return CategoriesOfProducts.objects.create(**validated_data)
-    
-    # def update(self, instance, validated_data):
-    #     instance.id = validated_data.get('id', instance.id)
-    #     instance.name = validated_data.get('name', instance.name)
-    #     instance.seq = validated_data.get('seq', instance.seq)
-    #     instance.save()
-    #     return instance
-    
-    # def delete(self, instance):
 
         
 

@@ -78,7 +78,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #CategoryOfProducts
     path('api-v1/', include(router.urls)),
-    path('api-v1/gettoken/', GetToken.as_view({'get':'create'})),
+    path('api-v1/gettoken/', GetToken.as_view({'get':'gettoken'})),
     path('api-v1/logout/', GetToken.as_view({'get':'logout'})),
     path('api-v1/login/', GetToken.as_view({'get':'login'})),
     path('api-v1/whoami/', GetToken.as_view({'get':'whoami'})),

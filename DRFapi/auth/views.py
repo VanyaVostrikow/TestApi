@@ -34,8 +34,8 @@ class GetToken(viewsets.ViewSet):
                 user = str(get_object_or_404(User, username=username))
                 return Response({'user':user})   
         else:
-            return Response({'error':'empty request'})
-    def create(self, request, *args, **kwargs):
+            return Response({'error':'empty request'}) 
+    def gettoken(self, request, *args, **kwargs):
         login_check = True
         if request.body:
             login_check = False
