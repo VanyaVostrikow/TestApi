@@ -38,7 +38,6 @@ class COPViewSet(mixins.RetrieveModelMixin,
     def mycreate(self, request, *args, **kwargs):
         serializer = COPSerializer(data=request.data)
         seq = request.data.get('seq')
-        print(seq)
         serializer.is_valid(raise_exception=True)
         serializer.check_seq(request.data.get('seq'))
         serializer.save()
@@ -49,10 +48,8 @@ class COPViewSet(mixins.RetrieveModelMixin,
     def mydestroy(self, request, pk, *args, **kwargs):        #Method DELETE
         check = DeleteCheck.COPcheck.check_delte(pk)
         if check == False:
-            print(check)
             instance = get_object_or_404(CategoriesOfProducts, pk=pk)
             if instance:
-                print(instance)
                 ans = get_object_or_404(CategoriesOfProducts, pk=pk)
                 instance.delete()
                 return Response({'answer':GOPSerializer(data=request.data).initial_data})
@@ -141,7 +138,6 @@ class GOPViewSet(mixins.RetrieveModelMixin,
                     return Response({'error404':'not founded'})
                 error = list_queryset.get('error').get('error')
                 return Response({'error':error})
-        print(list_queryset)
         list_queryset = list_queryset.get("queryset")
         out_queryset = []
         page = self.paginate_queryset(list_queryset) #реализация пагинации
@@ -186,7 +182,6 @@ class PViewSet(mixins.RetrieveModelMixin,
                 error = list_queryset.get('error').get('error')
                 return Response({'error':error})
         list_queryset = list_queryset.get("queryset")
-        print(type(list_queryset), list_queryset[0])
         out_queryset = []
         for i in range(len(list_queryset)):
             if list_queryset[i].hidden == False:

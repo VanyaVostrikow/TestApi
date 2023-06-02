@@ -55,7 +55,6 @@ class MultiFiltering:
                 '10':'sbp',
                 '11':'page',
                 '12':'per_page',
-
         }
         out_dict_field ={}
         out_dict = {}
@@ -101,25 +100,18 @@ class MultiFiltering:
             error = f"error:{e}"
             return error
         
-        
     def get_filtered_queryset(self):
         keys = self.dict_field.get('keys')
-        print(keys)
         dkeys = list(keys.keys())
         dict = self.dict_field.get('dict')
-        print(dict, dkeys)
         querydict = self.queryset
         for i in range(len(keys)):
             method = keys[dkeys[i]]
-            print(i,'in', "||||", querydict,'\n')
             value = dict[method]
             if method == 'page' or method == 'per_page':
-                print('x',method)
                 pass
             else:
                 querydict = (self.get_object(method, value, queryset=querydict))
-            print(i,'out', "||||", querydict,'\n\n')
-        print(querydict)
         error = None    
         delete = []
         if type(querydict) is str:
