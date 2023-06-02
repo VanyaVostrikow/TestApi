@@ -16,57 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
-from rest_framework.routers import Route, DynamicRoute
 from rest_framework.urlpatterns import format_suffix_patterns
 from testapi import views
 from testapi.views import *
 from auth.views import *
-
-class MyRouter(routers.SimpleRouter):
-    routes = [
-        # List route.
-        Route(
-            url=r'^{prefix}{trailing_slash}$',
-            mapping={
-                'get': 'list',
-                'post': 'mycreate'
-            },
-            name='{basename}-list',
-            detail=False,
-            initkwargs={'suffix': 'List'}
-            
-        ),
-        # Dynamically generated list routes. Generated using
-        # @action(detail=False) decorator on methods of the viewset.
-        DynamicRoute(
-            url=r'^{prefix}/{url_path}$',
-            name='{basename}-{url_name}',
-            detail=False,
-            initkwargs={}
-        ),
-        # Detail route.
-        Route(
-            url=r'^{prefix}/{lookup}$',
-            mapping={
-                'get': 'retrieve',
-                'put': 'myupdate',
-                'patch': 'mypartial_update',
-                'delete': 'mydestroy'
-            },
-            name='{basename}-detail',
-            detail=True,
-            initkwargs={'suffix': 'Instance'}
-        ),
-        # Dynamically generated detail routes. Generated using
-        # @action(detail=True) decorator on methods of the viewset.
-        DynamicRoute(
-            url=r'^{prefix}/{lookup}/{url_path}$',
-            name='{basename}-{url_name}',
-            detail=True,
-            initkwargs={}
-        ),
-    ]
+from testapi.routers import MyRouter
 
 router = MyRouter()
 router.register(r'product-categories', COPViewSet)

@@ -17,7 +17,9 @@
 >> - создание пользователя - headers {} body {'username', 'email', 'password'}
 ---
 > /gettoken/ 
->> - получить/создать токен - headers {} body {'username'\'email', 'password'}
+>> Получить или создать токен 
+>>> - если залогинен - headers {} body {}
+>>> - если не залогинен - headers {} body {'username' or 'email', 'password'}
 ---
 ---
 # Для авторизации нужно в хэдер передать:
