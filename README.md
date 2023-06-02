@@ -3,16 +3,19 @@
 > !!!ЕСЛИ ПОСТМАН ВЫДАЕТ ОШИБКУ CSRF-TOKEN - СБРОСЬ КУКИСЫ!!!
 ---
 # Роуты авторизации (auth)
-> /logout/ - выход из системы headers {} body{}
-> /login/ - вход в систему headers{Authorization liwest 'key'}
-> /whoami/ - Хто я? - headers{} body{}
-> /create/ - создание пользователя - headers {} body {'username', 'email', 'password'}
-> /gettoken/ - получить/создать токен - headers {} body {'username'\'email', 'password'}
+> /logout/ 
+>> - выход из системы headers {} body{}
+> /login/ 
+>> - вход в систему headers{Authorization liwest 'key'}
+> /whoami/ 
+>> - Хто я? - headers{} body{}
+> /create/ 
+>> - создание пользователя - headers {} body {'username', 'email', 'password'}
+> /gettoken/ 
+>> - получить/создать токен - headers {} body {'username'\'email', 'password'}
 ---
-Для авторизации нужно в хэдер передать:
----------------------------------------
+# Для авторизации нужно в хэдер передать:
 > "Authorization":"liwest {key}"
-
 >> В Постмане у меня почему-то криво собирается хэдер, собираю через вкладку авторизации:
 >>> type(API_KEY)
 >>> KEY(Authorization)
