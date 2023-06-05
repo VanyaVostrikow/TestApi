@@ -77,11 +77,11 @@ class GetToken(viewsets.ViewSet):
         serilizer = TokenSerilizer(instance=token[0])
         if login_check==False:
             logout(request)
-        print(user_logged_in)
         return Response({'token':serilizer.data})
     
     def logout(self, request):
         logout(request)
+        
         return Response({'logout':'ok'})
     
     def login(self, request):

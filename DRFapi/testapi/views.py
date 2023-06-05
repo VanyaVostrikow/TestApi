@@ -76,7 +76,7 @@ class COPViewSet(mixins.RetrieveModelMixin,
         if list_queryset.get('queryset') == None:
                 if list_queryset.get('error') == None:
                     return Response({'error404':'not founded'})
-                error = list_queryset.get('error').get('error')
+                error = list_queryset.get('error')
                 return Response({'error':error})
         list_queryset = list_queryset.get("queryset").order_by('seq')
         page = self.paginate_queryset(list_queryset) #реализация пагинации
@@ -136,7 +136,7 @@ class GOPViewSet(mixins.RetrieveModelMixin,
         if list_queryset.get('queryset') == None:
                 if list_queryset.get('error') == None:
                     return Response({'error404':'not founded'})
-                error = list_queryset.get('error').get('error')
+                error = list_queryset.get('error')
                 return Response({'error':error})
         list_queryset = list_queryset.get("queryset")
         out_queryset = []
