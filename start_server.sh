@@ -12,7 +12,7 @@ if [[ "$a" == "1" ]]; then
     requirements=`pip install -r requirements.txt `
     echo -e "\033[42m\033[30m all requirements done \033[0m"
     echo -e "\033[43m\033[30m check .env \033[0m \n"
-    python3 test_on_start/check_venv.py 
+    python3 test_on_start/check_env.py 
     echo -e "\033[45m All done. Start django-server... Wait tests \033[0m"
     source venv/bin/activate
 else
@@ -22,7 +22,7 @@ else
     echo "\033[43m\033[30m installing requirements..."
     requirements=`pip install -r requirements.txt`
     echo "\033[43m\033[30m create .env"
-    python3 test_on_start/check_venv.py 
+    python3 test_on_start/check_env.py 
     
     source venv/bin/activate
 fi
