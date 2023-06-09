@@ -9,22 +9,23 @@ sleep 1
 if [[ "$a" == "1" ]]; then
     echo -e "\033[42m\033[30m venv is exist \033[0m"
     echo -e "\033[43m\033[30m check new-requirements... \033[0m \n"
-    requirements=`pip install -r requirements.txt `
+    source venv/bin/activate
+    requirements=`pip install -r requirements.txt`
+    requirements=`pip3 install -r requirements.txt`
     echo -e "\033[42m\033[30m all requirements done \033[0m"
     echo -e "\033[43m\033[30m check .env \033[0m \n"
-    python3 test_on_start/check_env.py 
+    python3 test_on_start/create_env.py 
     echo -e "\033[45m All done. Start django-server... Wait tests \033[0m"
-    source venv/bin/activate
 else
     echo "\033[41m\033[30m venv not exist \033[0m"
     echo "\033[43m\033[30m Setting venv..."
     venv=`python3 -m venv venv`
+    source venv/bin/activate
     echo "\033[43m\033[30m installing requirements..."
     requirements=`pip install -r requirements.txt`
+    requirements=`pip3 install -r requirements.txt`
     echo "\033[43m\033[30m create .env"
-    python3 test_on_start/check_env.py 
-    
-    source venv/bin/activate
+    python3 test_on_start/create_env.py 
 fi
 
 

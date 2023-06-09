@@ -16,4 +16,5 @@ class Env_er:
             info.close()
             a = os.path.isfile("DRFapi/DRFapi/.env")
             return a
+Env_er().check_env()
 
